@@ -18,6 +18,11 @@
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.owlapi</groupId>
+			<artifactId>owlapi-parsers</artifactId>
+			<version>${owlapi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.owlapi</groupId>
 			<artifactId>owlapi-contract</artifactId>
 			<version>${owlapi.version}</version>
 			<scope>test</scope>

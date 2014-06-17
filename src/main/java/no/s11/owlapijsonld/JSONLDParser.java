@@ -6,7 +6,6 @@ import java.io.Reader;
 
 import org.coode.owlapi.rdfxml.parser.AnonymousNodeChecker;
 import org.coode.owlapi.rdfxml.parser.OWLRDFConsumer;
-//import org.coode.owlapi.rdfxml.parser.AnonymousNodeChecker;
 import org.semanticweb.owlapi.io.AbstractOWLParser;
 import org.semanticweb.owlapi.io.OWLOntologyDocumentSource;
 import org.semanticweb.owlapi.io.OWLParser;
@@ -19,8 +18,6 @@ import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
 import org.semanticweb.owlapi.model.OWLRuntimeException;
 import org.semanticweb.owlapi.model.UnloadableImportException;
 import org.xml.sax.SAXException;
-
-import uk.ac.manchester.cs.owl.owlapi.turtle.parser.OWLRDFConsumerAdapter;
 
 import com.github.jsonldjava.core.JsonLdError;
 import com.github.jsonldjava.core.JsonLdProcessor;
@@ -127,7 +124,7 @@ public class JSONLDParser extends AbstractOWLParser implements OWLParser {
 			}
 			
 			
-			final OWLRDFConsumerAdapter consumer = new OWLRDFConsumerAdapter(
+			final OWLRDFConsumer consumer = new OWLRDFConsumer(
 					ontology, new AnonymousNodeChecker() {
 						@Override
 						public boolean isAnonymousNode(IRI iri) {
