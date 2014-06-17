@@ -35,8 +35,6 @@ public class TestJSONLDParser {
 		// Test from classpath instead, to avoid network dependencies
 		//IRI ontologyIRI = IRI.create("http://www.w3.org/ns/hydra/core");
 		IRI ontologyIRI = IRI.create(getClass().getResource("/hydra.jsonld"));
-		System.out.println(ontologyIRI);
-		
 		OWLOntology ontology = ontologyManager.loadOntology(ontologyIRI);
 		checkHydraOntology(ontology);		
 	}
@@ -46,8 +44,6 @@ public class TestJSONLDParser {
 		// Test from classpath instead, to avoid network dependencies
 		//IRI ontologyIRI = IRI.create("http://www.w3.org/2006/vcard/ns.jsonld");
 		IRI ontologyIRI = IRI.create(getClass().getResource("/vcard.jsonld"));
-		System.out.println(ontologyIRI);
-		
 		OWLOntology ontology = ontologyManager.loadOntology(ontologyIRI);
 		checkVcardOntology(ontology);		
 	}
