@@ -94,8 +94,13 @@ public class JSONLDParser extends AbstractOWLParser implements OWLParser {
 				return IRI.create(object.getValue());
 			} else {
 				// BNode
-				System.out.println(object.getValue());
-				return IRI.create(object.getValue(), null);
+				if (! object.getValue().startsWith("_:")) {
+					// uh...??
+					return IRI.create(object.getValue(), null);
+				} else { 
+					String bnode = object.getValue().substring(2);
+					return IRI.create(bnode, null);
+				}
 			}
 		}
 	}
