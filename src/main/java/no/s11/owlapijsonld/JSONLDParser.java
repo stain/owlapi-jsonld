@@ -99,7 +99,7 @@ public class JSONLDParser extends AbstractOWLParser implements OWLParser {
 					return IRI.create(object.getValue(), null);
 				} else { 
 					String bnode = object.getValue().substring(2);
-					return IRI.create(bnode, null);
+					return IRI.create("genid" + bnode, null);
 				}
 			}
 		}
