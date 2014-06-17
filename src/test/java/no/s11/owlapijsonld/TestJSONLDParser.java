@@ -27,8 +27,9 @@ public class TestJSONLDParser {
 		assertTrue(ontologyManager.getOntologyFormat(ontology) instanceof JSONLDOntologyFormat);
 		assertEquals("http://www.w3.org/2006/vcard/ns", ""+ontology.getOntologyID().getOntologyIRI());
 		
-		IRI addressIRI = IRI.create("http://www.w3.org/2006/vcard/ns#Address");
 		assertFalse(ontology.getClassesInSignature().isEmpty());
+		
+		IRI addressIRI = IRI.create("http://www.w3.org/2006/vcard/ns#Address");
 		assertTrue(ontology.containsEntityInSignature(addressIRI));
 		
 	}
