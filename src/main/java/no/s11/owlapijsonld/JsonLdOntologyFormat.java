@@ -2,10 +2,10 @@ package no.s11.owlapijsonld;
 
 import org.semanticweb.owlapi.io.RDFOntologyFormat;
 
-public class JSONLDOntologyFormat extends RDFOntologyFormat {
+public class JsonLdOntologyFormat extends RDFOntologyFormat {
 
 	static { 
-		JSONLDParserFactory.register();
+		JsonLdParserFactory.register();
 	}
 	
 	/**

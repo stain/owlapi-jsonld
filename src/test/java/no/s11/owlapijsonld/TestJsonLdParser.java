@@ -20,13 +20,13 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 
-public class TestJSONLDParser {
+public class TestJsonLdParser {
 	
 	OWLOntologyManager ontologyManager = OWLManager.createOWLOntologyManager();
 	
 	@Before
 	public void register() { 
-		JSONLDParserFactory.register();
+		JsonLdParserFactory.register();
 	}
 	
 
@@ -49,7 +49,7 @@ public class TestJSONLDParser {
 	}
 
 	private void checkVcardOntology(OWLOntology ontology) {
-		assertTrue(ontologyManager.getOntologyFormat(ontology) instanceof JSONLDOntologyFormat);
+		assertTrue(ontologyManager.getOntologyFormat(ontology) instanceof JsonLdOntologyFormat);
 		assertEquals("http://www.w3.org/2006/vcard/ns", ""+ontology.getOntologyID().getOntologyIRI());
 		
 		assertFalse(ontology.getClassesInSignature().isEmpty());
@@ -64,7 +64,7 @@ public class TestJSONLDParser {
 	}
 	
 	private void checkHydraOntology(OWLOntology ontology) {
-		assertTrue(ontologyManager.getOntologyFormat(ontology) instanceof JSONLDOntologyFormat);
+		assertTrue(ontologyManager.getOntologyFormat(ontology) instanceof JsonLdOntologyFormat);
 		assertEquals("http://www.w3.org/ns/hydra/core", ""+ontology.getOntologyID().getOntologyIRI());
 		
 		assertFalse(ontology.getClassesInSignature().isEmpty());

@@ -26,7 +26,7 @@ import com.github.jsonldjava.core.RDFDataset;
 import com.github.jsonldjava.core.RDFDataset.Node;
 import com.github.jsonldjava.utils.JsonUtils;
 
-public class JSONLDParser extends AbstractOWLParser implements OWLParser {
+public class JsonLdParser extends AbstractOWLParser implements OWLParser {
 	
 	private static final String BNODE_PREFIX = "app://9bf9b875-d612-43d2-9d4b-3a50e3a5fd5b/";
 	
@@ -147,7 +147,7 @@ public class JSONLDParser extends AbstractOWLParser implements OWLParser {
 			} catch (JsonLdError e) {
 				throw new OWLParserException("Can't parse JSON-LD ontology " + documentSource , e);
 			}
-			JSONLDOntologyFormat format = new JSONLDOntologyFormat();
+			JsonLdOntologyFormat format = new JsonLdOntologyFormat();
 			consumer.setOntologyFormat(format);			
 			//PrefixManager prefixManager = parser.getPrefixManager();
 			

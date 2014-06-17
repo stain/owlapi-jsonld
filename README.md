@@ -12,9 +12,9 @@ support for the [OWL API](http://owlapi.sourceforge.net/).
 
 
 ```java
-import no.s11.owlapijsonld.JSONLDParserFactory;
+import no.s11.owlapijsonld.JsonLdParserFactory;
 static { 
-    JSONLDParserFactory.register() // only needed once
+    JsonLdParserFactory.register() // only needed once
 }
 // ...
 IRI ontologyIRI = IRI.create("http://www.w3.org/2006/vcard/ns.jsonld");
