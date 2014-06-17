@@ -25,6 +25,6 @@ public class JSONLDParserFactory implements OWLParserFactory {
 
 	@Override
 	public OWLParser createParser(OWLOntologyManager owlOntologyManager) {
-		return new JSONLDParser(owlOntologyManager.getOWLDataFactory());		
+		return new JSONLDParser();		
 	}
 }

@@ -5,20 +5,20 @@ import java.io.InputStream;
 import java.io.Reader;
 
 import org.coode.owlapi.rdfxml.parser.AnonymousNodeChecker;
+import org.coode.owlapi.rdfxml.parser.OWLRDFConsumer;
 //import org.coode.owlapi.rdfxml.parser.AnonymousNodeChecker;
 import org.semanticweb.owlapi.io.AbstractOWLParser;
 import org.semanticweb.owlapi.io.OWLOntologyDocumentSource;
 import org.semanticweb.owlapi.io.OWLParser;
 import org.semanticweb.owlapi.io.OWLParserException;
 import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.OWLDataFactory;
-import org.semanticweb.owlapi.model.OWLDatatype;
-import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyChangeException;
 import org.semanticweb.owlapi.model.OWLOntologyFormat;
 import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
+import org.semanticweb.owlapi.model.OWLRuntimeException;
 import org.semanticweb.owlapi.model.UnloadableImportException;
+import org.xml.sax.SAXException;
 
 import uk.ac.manchester.cs.owl.owlapi.turtle.parser.OWLRDFConsumerAdapter;
 
@@ -30,20 +30,14 @@ import com.github.jsonldjava.core.RDFDataset.Node;
 import com.github.jsonldjava.utils.JsonUtils;
 
 public class JSONLDParser extends AbstractOWLParser implements OWLParser {
-
-	protected OWLDataFactory owlDataFactory;	
-
-	public JSONLDParser(OWLDataFactory owlDataFactory) {
-		this.owlDataFactory = owlDataFactory;
-	}
 	
 	private static final String BNODE_PREFIX = "app://9bf9b875-d612-43d2-9d4b-3a50e3a5fd5b/";
 	
 	private class OWLTripleCallback implements JsonLdTripleCallback {
 		
-		private final OWLRDFConsumerAdapter consumer;
+		private final OWLRDFConsumer consumer;
 
-		private OWLTripleCallback(OWLRDFConsumerAdapter consumer) {
+		private OWLTripleCallback(OWLRDFConsumer consumer) {
 			this.consumer = consumer;
 		}
 
@@ -63,42 +57,41 @@ public class JSONLDParser extends AbstractOWLParser implements OWLParser {
 		            }
 		        }
 		    }		    
-		    consumer.handleEnd();
+		    try {
+				consumer.endModel();
+			} catch (SAXException e) {
+				throw new OWLRuntimeException(e);
+			}
 		    return consumer.getOntology();
 		}
 		
 
 		private void triple(Node subject, Node predicate, String value,
 				String datatype, String language, String graphName) {
-			OWLLiteral literal = asOwlLiteral(value, datatype, language);
-			consumer.addTriple(asIri(subject), asIri(predicate), literal);					
-		}
-
-		private OWLLiteral asOwlLiteral(String value, String datatype,
-				String language) {
-			if (language != null) { 
-				return owlDataFactory.getOWLLiteral(value, language);
-			} else if (datatype == null) { 
-				return owlDataFactory.getOWLLiteral(value);
-			} else { 
-				OWLDatatype owltype = owlDataFactory.getOWLDatatype(IRI.create(datatype));						
-				return owlDataFactory.getOWLLiteral(value, owltype);
-			}					
+			//OWLLiteral literal = asOwlLiteral(value, datatype, language);
+			try {
+				consumer.statementWithLiteralValue(asIri(subject), asIri(predicate), value, language, datatype);
+			} catch (SAXException e) {
+				throw new OWLRuntimeException(e);
+			}
 		}
 
 		private void triple(Node subject, Node predicate, Node object,
 				String graphName) {
 			// Ignore 'graphname' for now and load them all as a single ontology..
-			consumer.addTriple(asIri(subject), asIri(predicate), asIri(object));
-			
+			try {
+				consumer.statementWithResourceValue(asIri(subject), asIri(predicate), asIri(object));
+			} catch (SAXException e) {
+				throw new OWLRuntimeException(e);
+			}
 		}
 
-		private IRI asIri(Node object) {
+		private String asIri(Node object) {
 			if (object.isIRI()) { 
-				return IRI.create(object.getValue());
+				return object.getValue();
 			} else {
 				String bnode = object.getValue().substring(2);
-				return IRI.create(BNODE_PREFIX + bnode, null);
+				return BNODE_PREFIX + bnode;
 			}
 		}
 	}
