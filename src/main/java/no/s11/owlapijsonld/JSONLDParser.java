@@ -5,12 +5,12 @@ import java.io.InputStream;
 import java.io.Reader;
 
 import org.coode.owlapi.rdfxml.parser.AnonymousNodeChecker;
+//import org.coode.owlapi.rdfxml.parser.AnonymousNodeChecker;
 import org.semanticweb.owlapi.io.AbstractOWLParser;
 import org.semanticweb.owlapi.io.OWLOntologyDocumentSource;
 import org.semanticweb.owlapi.io.OWLParser;
 import org.semanticweb.owlapi.io.OWLParserException;
 import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.NodeID;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDatatype;
 import org.semanticweb.owlapi.model.OWLLiteral;
@@ -37,7 +37,10 @@ public class JSONLDParser extends AbstractOWLParser implements OWLParser {
 		this.owlDataFactory = owlDataFactory;
 	}
 	
+	private static final String BNODE_PREFIX = "app://9bf9b875-d612-43d2-9d4b-3a50e3a5fd5b/";
+	
 	private class OWLTripleCallback implements JsonLdTripleCallback {
+		
 		private final OWLRDFConsumerAdapter consumer;
 
 		private OWLTripleCallback(OWLRDFConsumerAdapter consumer) {
@@ -94,14 +97,8 @@ public class JSONLDParser extends AbstractOWLParser implements OWLParser {
 			if (object.isIRI()) { 
 				return IRI.create(object.getValue());
 			} else {
-				// BNode
-				if (! object.getValue().startsWith("_:")) {
-					// uh...??
-					return IRI.create(object.getValue(), null);
-				} else { 
-					String bnode = object.getValue().substring(2);
-					return IRI.create("genid" + bnode, null);
-				}
+				String bnode = object.getValue().substring(2);
+				return IRI.create(BNODE_PREFIX + bnode, null);
 			}
 		}
 	}
@@ -139,20 +136,17 @@ public class JSONLDParser extends AbstractOWLParser implements OWLParser {
 			
 			final OWLRDFConsumerAdapter consumer = new OWLRDFConsumerAdapter(
 					ontology, new AnonymousNodeChecker() {
-
 						@Override
 						public boolean isAnonymousNode(IRI iri) {
-							return NodeID.isAnonymousNodeIRI(iri);
+							return isAnonymousNode(iri.toString());
 						}
-
 						@Override
 						public boolean isAnonymousSharedNode(String iri) {
-							return NodeID.isAnonymousNodeID(iri);
+							return isAnonymousNode(iri);
 						}
-
 						@Override
 						public boolean isAnonymousNode(String iri) {
-							return NodeID.isAnonymousNodeIRI(iri);
+							return iri.startsWith(BNODE_PREFIX);
 						}
 					}, configuration);
 			
