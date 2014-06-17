@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -30,6 +29,18 @@ public class TestJSONLDParser {
 		JSONLDParserFactory.register();
 	}
 	
+
+	@Test
+	public void loadHydraIRI() throws Exception {
+		// Test from classpath instead, to avoid network dependencies
+		//IRI ontologyIRI = IRI.create("http://www.w3.org/ns/hydra/core");
+		IRI ontologyIRI = IRI.create(getClass().getResource("/hydra.jsonld"));
+		System.out.println(ontologyIRI);
+		
+		OWLOntology ontology = ontologyManager.loadOntology(ontologyIRI);
+		checkHydraOntology(ontology);		
+	}
+	
 	@Test
 	public void loadVcardIRI() throws Exception {
 		// Test from classpath instead, to avoid network dependencies
@@ -46,9 +57,29 @@ public class TestJSONLDParser {
 		assertEquals("http://www.w3.org/2006/vcard/ns", ""+ontology.getOntologyID().getOntologyIRI());
 		
 		assertFalse(ontology.getClassesInSignature().isEmpty());
+		assertFalse(ontology.getObjectPropertiesInSignature().isEmpty());
 		
-		IRI addressIRI = IRI.create("http://www.w3.org/2006/vcard/ns#Address");
-		assertTrue(ontology.containsEntityInSignature(addressIRI));
+		IRI address = IRI.create("http://www.w3.org/2006/vcard/ns#Address");
+		assertTrue(ontology.containsEntityInSignature(address));
+		
+		IRI title = IRI.create("http://www.w3.org/2006/vcard/ns#title");
+		assertTrue(ontology.containsEntityInSignature(title));
+		
+	}
+	
+	private void checkHydraOntology(OWLOntology ontology) {
+		assertTrue(ontologyManager.getOntologyFormat(ontology) instanceof JSONLDOntologyFormat);
+		assertEquals("http://www.w3.org/ns/hydra/core", ""+ontology.getOntologyID().getOntologyIRI());
+		
+		assertFalse(ontology.getClassesInSignature().isEmpty());
+		assertFalse(ontology.getObjectPropertiesInSignature().isEmpty());
+		
+		IRI resource = IRI.create("http://www.w3.org/ns/hydra/core#Resource");
+		assertTrue(ontology.containsEntityInSignature(resource));
+		
+		IRI operation = IRI.create("http://www.w3.org/ns/hydra/core#operation");
+		assertTrue(ontology.containsEntityInSignature(operation));
+
 	}
 	
 	@Test
