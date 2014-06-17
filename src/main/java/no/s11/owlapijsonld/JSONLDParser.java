@@ -59,7 +59,8 @@ public class JSONLDParser extends AbstractOWLParser implements OWLParser {
 		                triple(quad.getSubject(), quad.getPredicate(), quad.getObject(), graphName);			                    			                    
 		            }
 		        }
-		    }
+		    }		    
+		    consumer.handleEnd();
 		    return consumer.getOntology();
 		}
 		
@@ -171,6 +172,7 @@ public class JSONLDParser extends AbstractOWLParser implements OWLParser {
 //				format.setPrefix(prefixName,
 //						prefixManager.getPrefix(prefixName));
 //			}
+			
 			return format;		
 		} finally {
 			if (is != null) {
