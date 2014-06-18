@@ -19,6 +19,7 @@ import org.semanticweb.owlapi.model.OWLRuntimeException;
 import org.semanticweb.owlapi.model.UnloadableImportException;
 import org.xml.sax.SAXException;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.github.jsonldjava.core.JsonLdError;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.core.JsonLdTripleCallback;
@@ -112,15 +113,20 @@ public class JsonLdParser extends AbstractOWLParser implements OWLParser {
 		InputStream is = null;
 		try {
 			Object jsonObject;
-			
-			if (documentSource.isReaderAvailable()) {
-				jsonObject = JsonUtils.fromReader(documentSource.getReader());
-				
-			} else if (documentSource.isInputStreamAvailable()) {
-				jsonObject = JsonUtils.fromInputStream(documentSource.getInputStream());
-			} else {
-				jsonObject = JsonUtils.fromURL(documentSource.getDocumentIRI()
-						.toURI().toURL());
+			try { 
+				if (documentSource.isReaderAvailable()) {
+					jsonObject = JsonUtils.fromReader(documentSource.getReader());
+					
+				} else if (documentSource.isInputStreamAvailable()) {
+					jsonObject = JsonUtils.fromInputStream(documentSource.getInputStream());
+				} else {
+					jsonObject = JsonUtils.fromURL(documentSource.getDocumentIRI()
+							.toURI().toURL());
+				}
+			} catch (JsonParseException e) {
+				// Don't make it look like an IOException
+				// as it blocks loading other formats
+				throw new OWLParserException(e);
 			}
 			
 			
