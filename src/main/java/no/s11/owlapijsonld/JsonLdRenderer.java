@@ -5,13 +5,6 @@ import java.io.StringWriter;
 import java.io.Writer;
 
 import org.coode.owlapi.rdf.model.RDFResourceNode;
-import org.coode.owlapi.rdf.renderer.RDFRendererBase;
-import org.semanticweb.owlapi.model.OWLAnnotationProperty;
-import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLDataProperty;
-import org.semanticweb.owlapi.model.OWLDatatype;
-import org.semanticweb.owlapi.model.OWLNamedIndividual;
-import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyFormat;
 
@@ -20,91 +13,40 @@ import com.github.jsonldjava.core.JsonLdOptions;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.utils.JsonUtils;
 
-public class JsonLdRenderer extends RDFRendererBase {
-
+public class JsonLdRenderer extends RDFRendererAdapter {
 	
 	private Writer writer;
+	private StringWriter tripleWriter;
 
 	public JsonLdRenderer(OWLOntology ontology, Writer writer,
 			OWLOntologyFormat format) {
 		super(ontology, format);
 		this.writer = writer;
-	}
-
-	@Override
-	protected void beginDocument() throws IOException {
-		// TODO Auto-generated method stub
-		
+		this.tripleWriter = new StringWriter();
 	}
 
 	@Override
 	protected void endDocument() throws IOException {
-		Writer tmpWriter = new StringWriter();
-		getGraph().dumpTriples(tmpWriter);
+		String triples = tripleWriter.toString();
+		// Poor-man's attempt to generate N-Quads compatible format
+		triples = triples.replace(" -> ", " "); 
+		triples = triples.replace("\n", " .\n");
+		
+		System.out.println("Triples: ");
+		System.out.println(triples);
 		JsonLdOptions options = new JsonLdOptions();
-		options.outputForm = "compact";		
+		options.outputForm = "compacted";		
 		try {
-			Object json = JsonLdProcessor.fromRDF(tmpWriter.toString(), options);
-			
+			Object json = JsonLdProcessor.fromRDF(triples, options);			
 			JsonUtils.writePrettyPrint(writer, json);			
 		} catch (JsonLdError e) {
 			throw new IOException(e);
-		}
-
-		
-	}
-
-	@Override
-	protected void writeAnnotationPropertyComment(OWLAnnotationProperty prop)
-			throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void writeDataPropertyComment(OWLDataProperty prop)
-			throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void writeObjectPropertyComment(OWLObjectProperty prop)
-			throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void writeClassComment(OWLClass cls) throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void writeDatatypeComment(OWLDatatype datatype)
-			throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void writeIndividualComments(OWLNamedIndividual ind)
-			throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void writeBanner(String name) throws IOException {
-		// TODO Auto-generated method stub
-		
+		}		
 	}
 
 	@Override
 	public void render(RDFResourceNode node) throws IOException {
-		// TODO Auto-generated method stub
-		
+		getGraph().dumpTriples(tripleWriter);
 	}
 
 }
