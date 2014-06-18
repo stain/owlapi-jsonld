@@ -47,7 +47,13 @@ public class JsonLdRenderer extends RDFRendererAdapter {
 			URL owlJsonLD = getClass().getResource("owl.jsonld");
 			Object context = JsonUtils.fromURL(owlJsonLD);
 			JsonLdOptions options = new JsonLdOptions();
-			Object flattened = JsonLdProcessor.flatten(json, context, options);			
+			options.format = "application/nquads";
+			// A silly nquads round-trip to get rid of rdf:Lists
+			Object nquads = JsonLdProcessor.toRDF(json, options);
+			//System.out.println(nquads);
+			Object roundTrip = JsonLdProcessor.fromRDF(nquads, options);
+			//List<Object> expanded = JsonLdProcessor.expand(json); 
+			Object flattened = JsonLdProcessor.flatten(roundTrip, context, options);			
 			JsonUtils.writePrettyPrint(writer, flattened);			
 		} catch (JsonLdError e) {
 			throw new IOException(e);
