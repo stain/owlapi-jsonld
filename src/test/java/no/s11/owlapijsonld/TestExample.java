@@ -1,7 +1,5 @@
 package no.s11.owlapijsonld;
 
-import static org.junit.Assert.*;
-
 import org.coode.owlapi.turtle.TurtleOntologyFormat;
 import org.junit.Test;
 import org.semanticweb.owlapi.apibinding.OWLManager;
