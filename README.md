@@ -2,6 +2,10 @@
 
 [![Build Status](https://travis-ci.org/stain/owlapi-jsonld.svg)](https://travis-ci.org/stain/owl2jsonld)
 
+
+[![doi:10.5281/zenodo.10561](https://zenodo.org/badge/doi/10.5281/zenodo.10561.png)](http://dx.doi.org/10.5281/zenodo.10561)
+
+
 *JSON-LD support for OWLAPI*
 
 Add [JSON-LD](http://www.w3.org/TR/json-ld/) parser and renderer 
