@@ -1,4 +1,8 @@
-package no.s11.owlapijsonld;
+package no.s11.owlapijsonld.example;
+
+import no.s11.owlapijsonld.JsonLdOntologyFormat;
+import no.s11.owlapijsonld.JsonLdParserFactory;
+import no.s11.owlapijsonld.JsonLdStorer;
 
 import org.coode.owlapi.turtle.TurtleOntologyFormat;
 import org.junit.Test;

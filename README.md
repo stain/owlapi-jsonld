@@ -29,7 +29,7 @@ If using Maven, edit `pom.xml` to include:
 	</repositories>
 ```
 
-From the [example](src/test/java/no/s11/owlapijsonld/TestExample.java):
+From the [example](src/test/java/no/s11/owlapijsonld/example/TestExample.java):
 
 Reading an JSON-LD-based ontology:
 
