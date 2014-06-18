@@ -43,7 +43,7 @@ public class JsonLdStorer extends AbstractOWLOntologyStorer
 		JsonLdRenderer ren = new JsonLdRenderer(ontology, writer, format);
         try {
 			ren.render();
-		} catch (IOException e) {
+		} catch (IOException e) {			
 			throw new OWLOntologyStorageException(e);
 		}
 	}
