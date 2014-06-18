@@ -8,6 +8,7 @@ import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLIndividual;
+import org.semanticweb.owlapi.model.OWLObjectIntersectionOf;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -31,12 +32,21 @@ public class TestJsonLdStorer {
 		
 		OWLClass person = factory.getOWLClass(IRI.create(ontologyIRI + "#Person"));
 				
-		// TODO: Make this politically correct
-		OWLClass man = factory.getOWLClass(IRI.create(ontologyIRI + "#Man"));
 		OWLClass woman = factory.getOWLClass(IRI.create(ontologyIRI + "#Woman"));
-		manager.addAxiom(ont,  factory.getOWLSubClassOfAxiom(man, person));
+		OWLClass man = factory.getOWLClass(IRI.create(ontologyIRI + "#Man"));
 		manager.addAxiom(ont,  factory.getOWLSubClassOfAxiom(woman, person));
+		manager.addAxiom(ont,  factory.getOWLSubClassOfAxiom(man, person));
 
+		OWLClass malePhenotype = factory.getOWLClass(IRI.create(ontologyIRI + "#MalePhenotype"));
+		OWLClass femalePhenotype = factory.getOWLClass(IRI.create(ontologyIRI + "#FemalePhenotype"));
+
+		OWLObjectIntersectionOf malePerson = factory.getOWLObjectIntersectionOf(malePhenotype, person);
+		manager.addAxiom(ont, factory.getOWLSubClassOfAxiom(man, malePerson));
+		
+		OWLObjectIntersectionOf femalePerson = factory.getOWLObjectIntersectionOf(femalePhenotype, person);
+		manager.addAxiom(ont, factory.getOWLSubClassOfAxiom(woman, femalePerson));
+		
+		manager.addAxiom(ont, factory.getOWLEquivalentClassesAxiom(man, malePhenotype, person));
 	    
 		OWLIndividual john = factory.getOWLNamedIndividual(IRI
 	            .create(ontologyIRI + "#John"));
