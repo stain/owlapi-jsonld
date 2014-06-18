@@ -4,27 +4,65 @@
 
 *JSON-LD support for OWLAPI*
 
-Add [JSON-LD](http://www.w3.org/TR/json-ld/) parser and writer 
-support for the [OWL API](http://owlapi.sourceforge.net/). 
+Add [JSON-LD](http://www.w3.org/TR/json-ld/) parser and renderer 
+(read and write) support for the [OWL API](http://owlapi.sourceforge.net/). 
 
 
 ## Usage
 
+If using Maven, edit `pom.xml` to include:
+
+```xml
+	<dependencies>
+		<dependency>
+			<groupId>org.clojars.stain</groupId>
+			<artifactId>owlapi-jsonld</artifactId>
+			<version>0.1.0</version>
+		</dependency>
+	</dependencies>
+	<repositories>
+		<repository>
+			<id>clojars</id>
+			<name>Clojars repository</name>
+			<url>https://clojars.org/repo</url>			
+		</repository>
+	</repositories>
+```
+
+From the [example](src/test/java/no/s11/owlapijsonld/TestExample.java):
+
+Reading an JSON-LD-based ontology:
+
 
 ```java
-import no.s11.owlapijsonld.JsonLdParserFactory;
-static { 
-    JsonLdParserFactory.register() // only needed once
-}
-// ...
-IRI ontologyIRI = IRI.create("http://www.w3.org/2006/vcard/ns.jsonld");
-OWLOntology ontology = ontologyManager.loadOntology(ontologyIRI);
+		OWLOntologyManager ontologyManager = OWLManager.createOWLOntologyManager();
+		JsonLdParserFactory.register(); // Really just needed once
+
+		IRI vcardIri = IRI.create("http://www.w3.org/2006/vcard/ns.jsonld");
+		OWLOntology ontology = ontologyManager.loadOntology(vcardIri);
+		ontologyManager.saveOntology(ontology, new TurtleOntologyFormat(), System.out);
 ```
+
+Writing out an ontology as JSON-LD:
+
+
+```java
+		OWLOntologyManager ontologyManager = OWLManager.createOWLOntologyManager();
+		JsonLdStorer.register(ontologyManager); // Needed once per ontologyManager
+
+		IRI oaIri = IRI.create("http://www.w3.org/ns/oa.rdf");
+		OWLOntology ontology = ontologyManager.loadOntology(oaIri);
+		
+		ontologyManager.saveOntology(ontology, new JsonLdOntologyFormat(), System.out);		
+```
+
+For further details about the OWL API, see [OWL API documentation](https://github.com/owlcs/owlapi/wiki/Documentation)
+
 
 ## License
 
 Copyright © 2014 [Stian Soiland-Reyes](http://orcid.org/0000-0001-9842-9718), [University of Manchester](http://www.cs.manchester.ac.uk/).
 
 License under the alternative of [LGPL](http://www.gnu.org/licenses/lgpl) or
-[Apache license 2.0](http://www.apache.org/licenses); as OWL API.
+[Apache license 2.0](http://www.apache.org/licenses); the same as OWL API.
 
