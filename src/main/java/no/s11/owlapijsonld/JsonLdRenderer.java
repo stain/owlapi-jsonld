@@ -14,6 +14,7 @@ import org.coode.owlapi.rdf.model.RDFLiteralNode;
 import org.coode.owlapi.rdf.model.RDFNode;
 import org.coode.owlapi.rdf.model.RDFResourceNode;
 import org.coode.owlapi.rdf.model.RDFTriple;
+import org.semanticweb.owlapi.model.NodeID;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyFormat;
 
@@ -58,7 +59,6 @@ public class JsonLdRenderer extends RDFRendererAdapter {
 			Map<String, Object> jsonTriple = new HashMap<>();
 			jsonTriple = objectToJson(t.getSubject());
 			// TODO: Do we need to express bnodes differently?
-			jsonTriple.put("@id", t.getSubject().getIRI().toString());
 			jsonTriple.put(t.getProperty().getIRI().toString(), 
 					objectToJson(t.getObject()));
 			triplesJson.add(jsonTriple);
@@ -74,11 +74,19 @@ public class JsonLdRenderer extends RDFRendererAdapter {
 				json.put("@type", literal.getDatatype().toString());
 			} else if (literal.getLang() != null) {
 				json.put("@lang", literal.getLang());
-			}			
-		} else { 
-			json.put("@id", object.getIRI().toString());
+			}
+		} else {
+			json.put("@id", jsonIdFor((RDFResourceNode) object));
 		}
 		return json;
+	}
+
+	private String jsonIdFor(RDFResourceNode object) {
+		if (object.isAnonymous()) {
+			return "_:node" + object.getId();
+		} else {
+			return object.getIRI().toString();
+		}
 	}
 
 	@Override
