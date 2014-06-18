@@ -59,7 +59,7 @@ public class JsonLdRenderer extends RDFRendererAdapter {
 			Map<String, Object> jsonTriple = new HashMap<>();
 			jsonTriple = objectToJson(t.getSubject());
 			// TODO: Do we need to express bnodes differently?
-			jsonTriple.put(t.getProperty().getIRI().toString(), 
+			jsonTriple.put(idForResource(t.getProperty()),
 					objectToJson(t.getObject()));
 			triplesJson.add(jsonTriple);
 		}
@@ -76,12 +76,12 @@ public class JsonLdRenderer extends RDFRendererAdapter {
 				json.put("@lang", literal.getLang());
 			}
 		} else {
-			json.put("@id", jsonIdFor((RDFResourceNode) object));
+			json.put("@id", idForResource((RDFResourceNode) object));
 		}
 		return json;
 	}
 
-	private String jsonIdFor(RDFResourceNode object) {
+	private String idForResource(RDFResourceNode object) {
 		if (object.isAnonymous()) {
 			return "_:node" + object.getId();
 		} else {
