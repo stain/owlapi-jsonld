@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.clojars.stain</groupId>
 	<artifactId>owlapi-jsonld</artifactId>
-	<version>0.1.0</version>
+	<version>0.2.0-SNAPSHOT</version>
 	<name>OWL API JSON-LD support</name>
 	<description>JSON-LD parser and writer for OWL API</description>
 	<properties>
@@ -106,7 +106,7 @@
 		<connection>scm:git:git://github.com/stain/owlapi-jsonld.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/stain/owlapi-jsonld.git</developerConnection>
 		<url>https://github.com/stain/owlapi-jsonld/</url>
-	  <tag>0.1.0</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<distributionManagement>
