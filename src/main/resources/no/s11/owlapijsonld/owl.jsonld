@@ -1,0 +1,208 @@
+{
+  "@context": {
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    
+    "rdf:first" : {
+      "@type" : "@id"
+    },
+    "rdf:type" : {
+      "@type" : "@id"
+    },
+    "rdf:rest" : {
+      "@type" : "@id"
+    },
+    "rdf:subject" : {
+      "@type" : "@id"
+    },
+    "rdf:value" : {
+      "@type" : "@id"
+    },
+    "rdf:predicate" : {
+      "@type" : "@id"
+    },
+    "rdf:object" : {
+      "@type" : "@id"
+    },      
+
+    "rdfs:subClassOf" : {
+      "@type" : "@id"
+    },
+    "rdfs:domain" : {
+      "@type" : "@id"
+    },
+    "rdfs:subPropertyOf" : {
+      "@type" : "@id"
+    },
+    "rdfs:seeAlso" : {
+      "@type" : "@id"
+    },
+    "rdfs:range" : {
+      "@type" : "@id"
+    },
+    "rdfs:member" : {
+      "@type" : "@id"
+    },
+
+    "owl:minCardinality" : {
+      "@type" : "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+    },
+    "owl:qualifiedCardinality" : {
+      "@type" : "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+    },
+    "owl:annotatedTarget" : {
+      "@type" : "@id"
+    },
+    "owl:seeAlso" : {
+      "@type" : "@id"
+    },    
+    "owl:cardinality" : {
+      "@type" : "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+    },
+    "owl:hasSelf" : {
+      "@type" : "@id"
+    },
+    "owl:onDatatype" : {
+      "@type" : "@id"
+    },
+    "owl:onDataRange" : {
+      "@type" : "@id"
+    },
+    "owl:differentFrom" : {
+      "@type" : "@id"
+    },
+    "owl:someValuesFrom" : {
+      "@type" : "@id"
+    },
+    "owl:disjointUnionOf" : {
+      "@type" : "@id",
+      "@container": "@list"      
+    },
+    "owl:versionIRI" : {
+      "@type" : "@id"
+    },
+    "owl:allValuesFrom" : {
+      "@type" : "@id"
+    },
+    "owl:inverseOf" : {
+      "@type" : "@id"
+    },
+    "owl:onProperty" : {
+      "@type" : "@id"
+    },
+    "owl:priorVersion" : {
+      "@type" : "@id"
+    },
+    "owl:complementOf" : {
+      "@type" : "@id"
+    },
+    "owl:disjointWith" : {
+      "@type" : "@id"
+    },
+    "owl:unionOf" : {
+      "@type" : "@id",
+      "@container": "@list"      
+    },
+    "owl:maxCardinality" : {
+      "@type" : "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+    },
+    "owl:withRestrictions" : {
+      "@type" : "@id",
+      "@container": "@list"      
+    },
+    "owl:bottomDataProperty" : {
+      "@type" : "http://www.w3.org/2000/01/rdf-schema#Literal"
+    },
+    "owl:propertyChainAxiom" : {
+      "@type" : "@id",
+      "@container": "@list"      
+    },
+    "owl:sameAs" : {
+      "@type" : "@id"
+    },
+    "owl:equivalentClass" : {
+      "@type" : "@id"
+    },
+    "owl:equivalentProperty" : {
+      "@type" : "@id"
+    },
+    "owl:members" : {
+      "@type" : "@id",
+      "@container": "@list"      
+    },
+    "owl:incompatibleWith" : {
+      "@type" : "@id"
+    },
+    "owl:intersectionOf" : {
+      "@type" : "@id",
+      "@container": "@list"      
+    },
+    "owl:distinctMembers" : {
+      "@type" : "@id",
+      "@container": "@list"      
+    },
+    "owl:sourceIndividual" : {
+      "@type" : "@id"
+    },
+    "owl:bottomObjectProperty" : {
+      "@type" : "@id"
+    },
+    "owl:topObjectProperty" : {
+      "@type" : "@id"
+    },
+    "owl:hasKey" : {
+      "@type" : "@id",
+      "@container": "@list"      
+    },
+    "owl:annotatedSource" : {
+      "@type" : "@id"
+    },
+    "owl:onClass" : {
+      "@type" : "@id"
+    },
+    "owl:onProperties" : {
+      "@type" : "@id",
+      "@container": "@list"      
+    },
+    "owl:targetIndividual" : {
+      "@type" : "@id"
+    },
+    "owl:assertionProperty" : {
+      "@type" : "@id"
+    },
+    "owl:maxQualifiedCardinality" : {
+      "@type" : "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+    },
+    "owl:datatypeComplementOf" : {
+      "@type" : "@id"
+    },
+    "owl:backwardCompatibleWith" : {
+      "@type" : "@id"
+    },        
+    "owl:oneOf" : {
+      "@type" : "@id",
+      "@container": "@list"            
+    },
+    "owl:targetValue" : {
+      "@type" : "http://www.w3.org/2000/01/rdf-schema#Literal"
+    },
+    "owl:propertyDisjointWith" : {
+      "@type" : "@id"
+    },
+    "owl:imports" : {
+      "@type" : "@id"     
+    },
+    "owl:annotatedProperty" : {
+      "@type" : "@id"
+    },
+    "owl:minQualifiedCardinality" : {
+      "@type" : "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+    },
+    "owl:topDataProperty" : {
+      "@type" : "http://www.w3.org/2000/01/rdf-schema#Literal"
+    }
+  }
+    
+}
