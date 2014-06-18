@@ -31,7 +31,18 @@ public class JsonLdRenderer extends RDFRendererAdapter {
 		String triples = tripleWriter.toString();
 		// Poor-man's attempt to generate N-Quads compatible format
 		triples = triples.replace(" -> ", " "); 
-		triples = triples.replace("\n", " .\n");
+		
+		// We need to add the trailing dots. We'll use \b as a temporary \n
+		triples = triples.replace(">\n", "> . \b");
+		triples = triples.replace("\"\n", "\" . \b");
+		triples = triples.replaceAll("(\"@[a-zA-Z]+(-[a-zA-Z0-9]+])?)\n", "$1 . \b");		
+		triples = triples.replaceAll("(_:genid[0-9]+)\n", "$1 . \b");		
+		// Remaining newlines now should hopefully be within literals
+		triples = triples.replace("\n", "\\n");
+		triples = triples.replace("\r", "");
+		triples = triples.replace("\b", "\n");
+		
+		
 		
 //		System.out.println("Triples: ");
 //		System.out.println(triples);
