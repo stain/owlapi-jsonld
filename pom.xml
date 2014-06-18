@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>no.s11.owlapijsonld</groupId>
 	<artifactId>owlapi-jsonld</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 	<name>OWL API JSON-LD support</name>
 	<description>JSON-LD parser and writer for OWL API</description>
 	<properties>
