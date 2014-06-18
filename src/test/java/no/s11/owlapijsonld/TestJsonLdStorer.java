@@ -50,12 +50,14 @@ public class TestJsonLdStorer {
 	    
 		OWLIndividual john = factory.getOWLNamedIndividual(IRI
 	            .create(ontologyIRI + "#John"));
-	    manager.addAxiom(ont, factory.getOWLClassAssertionAxiom(man, john));
+	    manager.addAxiom(ont, factory.getOWLClassAssertionAxiom(malePhenotype, john));
+	    manager.addAxiom(ont, factory.getOWLClassAssertionAxiom(person, john));
 	    
 
 	    OWLIndividual mary = factory.getOWLNamedIndividual(IRI
 	            .create(ontologyIRI + "#Mary"));
 	    manager.addAxiom(ont, factory.getOWLClassAssertionAxiom(person, mary));
+
 	    
 	    OWLObjectProperty hasWife = factory.getOWLObjectProperty(IRI
 	    		.create(ontologyIRI + "#hasWife"));
