@@ -1,4 +1,9 @@
 {
+  "http://purl.org/pav/retrievedFrom": {"@id": "http://www.w3.org/ns/hydra/core#"},
+  "http://purl.org/pav/retrievedOn": {"@value": "2014-06-20T12:52:18Z",
+                                      "@type": "http://www.w3.org/2001/XMLSchema#dateTime"},
+
+
   "@context": {
     "hydra": "http://www.w3.org/ns/hydra/core#",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
