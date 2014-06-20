@@ -1,4 +1,9 @@
 {
+  "comment": "Copyright © 2014 World Wide Web Consortium, (Massachusetts Institute of Technology, European Research Consortium for Informatics and Mathematics, Keio University, Beihang). All Rights Reserved. http://www.w3.org/Consortium/Legal/2002/copyright-documents-20021231",
+  "http://purl.org/pav/retrievedFrom": {"@id": "http://www.w3.org/2006/vcard/ns.jsonld"},
+  "http://purl.org/pav/retrievedOn": {"@value": "2014-06-17T15:01:26Z",
+                                      "@type": "http://www.w3.org/2001/XMLSchema#dateTime"},
+
   "@context": {
     "vcard": "http://www.w3.org/2006/vcard/ns#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
