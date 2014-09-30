@@ -67,6 +67,6 @@ For further details about the OWL API, see [OWL API documentation](https://githu
 
 Copyright © 2014 [Stian Soiland-Reyes](http://orcid.org/0000-0001-9842-9718), [University of Manchester](http://www.cs.manchester.ac.uk/).
 
-License under the alternative of [LGPL](http://www.gnu.org/licenses/lgpl) or
+License under the alternative of [LGPL 3.0](http://www.gnu.org/licenses/lgpl-3.0) or
 [Apache license 2.0](http://www.apache.org/licenses); the same as OWL API.
 
