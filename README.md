@@ -1,4 +1,4 @@
-# owl2jsonld
+# owlapi-jsonld
 
 [![Build Status](https://travis-ci.org/stain/owlapi-jsonld.svg)](https://travis-ci.org/stain/owl2jsonld)
 
