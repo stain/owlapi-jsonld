@@ -3,6 +3,9 @@ package no.s11.owlapijsonld;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.coode.owlapi.rdfxml.parser.AnonymousNodeChecker;
 import org.coode.owlapi.rdfxml.parser.OWLRDFConsumer;
@@ -34,12 +37,16 @@ public class JsonLdParser extends AbstractOWLParser implements OWLParser {
 	private class OWLTripleCallback implements JsonLdTripleCallback {
 		
 		private final OWLRDFConsumer consumer;
-
+		
+		private final Map<String, String> prefixes = new HashMap<>();
+		
 		private OWLTripleCallback(OWLRDFConsumer consumer) {
 			this.consumer = consumer;
 		}
 
 		public Object call(RDFDataset dataset) {
+			prefixes.putAll(dataset.getNamespaces());
+			
 		    for (String graphName : dataset.graphNames()) {
 		        final java.util.List<RDFDataset.Quad> quads = dataset.getQuads(graphName);
 		        if ("@default".equals(graphName)) {
@@ -147,21 +154,18 @@ public class JsonLdParser extends AbstractOWLParser implements OWLParser {
 					}, configuration);
 			
 			
-			JsonLdTripleCallback callback = new OWLTripleCallback(consumer);
+			OWLTripleCallback callback = new OWLTripleCallback(consumer);
 			try {
 				JsonLdProcessor.toRDF(jsonObject, callback);
 			} catch (JsonLdError e) {
 				throw new OWLParserException("Can't parse JSON-LD ontology " + documentSource , e);
 			}
 			JsonLdOntologyFormat format = new JsonLdOntologyFormat();
-			consumer.setOntologyFormat(format);			
-			//PrefixManager prefixManager = parser.getPrefixManager();
+			consumer.setOntologyFormat(format);
 			
-			// TODO: Set prefixes from JSON-LD top-level context...?
-//			for (String prefixName : prefixManager.getPrefixNames()) {
-//				format.setPrefix(prefixName,
-//						prefixManager.getPrefix(prefixName));
-//			}
+			for(Entry<String, String> nextPrefix : callback.prefixes.entrySet()) {
+				format.setPrefix(nextPrefix.getKey(), nextPrefix.getValue());
+			}
 			
 			return format;		
 		} finally {
