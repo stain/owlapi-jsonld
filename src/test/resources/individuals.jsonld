@@ -1,0 +1,272 @@
+{
+  "@context" : {
+    "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd" : "http://www.w3.org/2001/XMLSchema#",
+    "owl" : "http://www.w3.org/2002/07/owl#",
+    "rdf:first" : {
+      "@type" : "@id"
+    },
+    "rdf:type" : {
+      "@type" : "@id"
+    },
+    "rdf:rest" : {
+      "@type" : "@id"
+    },
+    "rdf:subject" : {
+      "@type" : "@id"
+    },
+    "rdf:value" : {
+      "@type" : "@id"
+    },
+    "rdf:predicate" : {
+      "@type" : "@id"
+    },
+    "rdf:object" : {
+      "@type" : "@id"
+    },
+    "rdfs:subClassOf" : {
+      "@type" : "@id"
+    },
+    "rdfs:domain" : {
+      "@type" : "@id"
+    },
+    "rdfs:subPropertyOf" : {
+      "@type" : "@id"
+    },
+    "rdfs:seeAlso" : {
+      "@type" : "@id"
+    },
+    "rdfs:range" : {
+      "@type" : "@id"
+    },
+    "rdfs:member" : {
+      "@type" : "@id"
+    },
+    "owl:minCardinality" : {
+      "@type" : "xsd:nonNegativeInteger"
+    },
+    "owl:qualifiedCardinality" : {
+      "@type" : "xsd:nonNegativeInteger"
+    },
+    "owl:annotatedTarget" : {
+      "@type" : "@id"
+    },
+    "owl:seeAlso" : {
+      "@type" : "@id"
+    },
+    "owl:cardinality" : {
+      "@type" : "xsd:nonNegativeInteger"
+    },
+    "owl:hasSelf" : {
+      "@type" : "@id"
+    },
+    "owl:onDatatype" : {
+      "@type" : "@id"
+    },
+    "owl:onDataRange" : {
+      "@type" : "@id"
+    },
+    "owl:differentFrom" : {
+      "@type" : "@id"
+    },
+    "owl:someValuesFrom" : {
+      "@type" : "@id"
+    },
+    "owl:disjointUnionOf" : {
+      "@type" : "@id",
+      "@container" : "@list"
+    },
+    "owl:versionIRI" : {
+      "@type" : "@id"
+    },
+    "owl:allValuesFrom" : {
+      "@type" : "@id"
+    },
+    "owl:inverseOf" : {
+      "@type" : "@id"
+    },
+    "owl:onProperty" : {
+      "@type" : "@id"
+    },
+    "owl:priorVersion" : {
+      "@type" : "@id"
+    },
+    "owl:complementOf" : {
+      "@type" : "@id"
+    },
+    "owl:disjointWith" : {
+      "@type" : "@id"
+    },
+    "owl:unionOf" : {
+      "@type" : "@id",
+      "@container" : "@list"
+    },
+    "owl:maxCardinality" : {
+      "@type" : "xsd:nonNegativeInteger"
+    },
+    "owl:withRestrictions" : {
+      "@type" : "@id",
+      "@container" : "@list"
+    },
+    "owl:bottomDataProperty" : {
+      "@type" : "rdfs:Literal"
+    },
+    "owl:propertyChainAxiom" : {
+      "@type" : "@id",
+      "@container" : "@list"
+    },
+    "owl:sameAs" : {
+      "@type" : "@id"
+    },
+    "owl:equivalentClass" : {
+      "@type" : "@id"
+    },
+    "owl:equivalentProperty" : {
+      "@type" : "@id"
+    },
+    "owl:members" : {
+      "@type" : "@id",
+      "@container" : "@list"
+    },
+    "owl:incompatibleWith" : {
+      "@type" : "@id"
+    },
+    "owl:intersectionOf" : {
+      "@type" : "@id",
+      "@container" : "@list"
+    },
+    "owl:distinctMembers" : {
+      "@type" : "@id",
+      "@container" : "@list"
+    },
+    "owl:sourceIndividual" : {
+      "@type" : "@id"
+    },
+    "owl:bottomObjectProperty" : {
+      "@type" : "@id"
+    },
+    "owl:topObjectProperty" : {
+      "@type" : "@id"
+    },
+    "owl:hasKey" : {
+      "@type" : "@id",
+      "@container" : "@list"
+    },
+    "owl:annotatedSource" : {
+      "@type" : "@id"
+    },
+    "owl:onClass" : {
+      "@type" : "@id"
+    },
+    "owl:onProperties" : {
+      "@type" : "@id",
+      "@container" : "@list"
+    },
+    "owl:targetIndividual" : {
+      "@type" : "@id"
+    },
+    "owl:assertionProperty" : {
+      "@type" : "@id"
+    },
+    "owl:maxQualifiedCardinality" : {
+      "@type" : "xsd:nonNegativeInteger"
+    },
+    "owl:datatypeComplementOf" : {
+      "@type" : "@id"
+    },
+    "owl:backwardCompatibleWith" : {
+      "@type" : "@id"
+    },
+    "owl:oneOf" : {
+      "@type" : "@id",
+      "@container" : "@list"
+    },
+    "owl:targetValue" : {
+      "@type" : "rdfs:Literal"
+    },
+    "owl:propertyDisjointWith" : {
+      "@type" : "@id"
+    },
+    "owl:imports" : {
+      "@type" : "@id"
+    },
+    "owl:annotatedProperty" : {
+      "@type" : "@id"
+    },
+    "owl:minQualifiedCardinality" : {
+      "@type" : "xsd:nonNegativeInteger"
+    },
+    "owl:topDataProperty" : {
+      "@type" : "rdfs:Literal"
+    }
+  },
+  "@graph" : [ {
+    "@id" : "_:b0",
+    "@type" : "owl:Class",
+    "owl:intersectionOf" : [ "http://example.com/ontology#MalePhenotype", "http://example.com/ontology#Person" ]
+  }, {
+    "@id" : "_:b1",
+    "@type" : "owl:Class",
+    "owl:intersectionOf" : [ "http://example.com/ontology#FemalePhenotype", "http://example.com/ontology#Person" ]
+  }, {
+    "@id" : "http://example.com/ontology",
+    "@type" : "owl:Ontology"
+  }, {
+    "@id" : "http://example.com/ontology#FemalePhenotype",
+    "@type" : "owl:Class",
+    "rdfs:isDefinedBy" : {
+      "@id" : "http://example.com/ontology"
+    }
+  }, {
+    "@id" : "http://example.com/ontology#John",
+    "@type" : [ "http://example.com/ontology#MalePhenotype", "http://example.com/ontology#Person", "owl:NamedIndividual" ],
+    "http://example.com/ontology#hasWife" : {
+      "@id" : "http://example.com/ontology#Mary"
+    },
+    "rdfs:isDefinedBy" : {
+      "@id" : "http://example.com/ontology"
+    }
+  }, {
+    "@id" : "http://example.com/ontology#MalePhenotype",
+    "@type" : "owl:Class",
+    "rdfs:isDefinedBy" : {
+      "@id" : "http://example.com/ontology"
+    },
+    "owl:equivalentClass" : "http://example.com/ontology#Man"
+  }, {
+    "@id" : "http://example.com/ontology#Man",
+    "@type" : "owl:Class",
+    "rdfs:isDefinedBy" : {
+      "@id" : "http://example.com/ontology"
+    },
+    "rdfs:subClassOf" : [ "http://example.com/ontology#Person", "_:b0" ],
+    "owl:equivalentClass" : "http://example.com/ontology#Person"
+  }, {
+    "@id" : "http://example.com/ontology#Mary",
+    "@type" : [ "http://example.com/ontology#Person", "owl:NamedIndividual" ],
+    "rdfs:isDefinedBy" : {
+      "@id" : "http://example.com/ontology"
+    }
+  }, {
+    "@id" : "http://example.com/ontology#Person",
+    "@type" : "owl:Class",
+    "rdfs:isDefinedBy" : {
+      "@id" : "http://example.com/ontology"
+    }
+  }, {
+    "@id" : "http://example.com/ontology#Woman",
+    "@type" : "owl:Class",
+    "rdfs:isDefinedBy" : {
+      "@id" : "http://example.com/ontology"
+    },
+    "rdfs:subClassOf" : [ "http://example.com/ontology#Person", "_:b1" ]
+  }, {
+    "@id" : "http://example.com/ontology#hasWife",
+    "@type" : "owl:ObjectProperty",
+    "rdfs:isDefinedBy" : {
+      "@id" : "http://example.com/ontology"
+    },
+    "rdfs:range" : "http://example.com/ontology#Woman"
+  } ]
+}
